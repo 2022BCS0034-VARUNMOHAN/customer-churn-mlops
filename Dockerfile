@@ -1,15 +1,20 @@
+# Base image
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
-# copy everything
-COPY . .
+# Copy requirements
+COPY requirements.txt .
 
-# install dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# expose port
+# Copy entire project
+COPY . .
+
+# Expose port
 EXPOSE 8000
 
-# run server
+# Run FastAPI
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
