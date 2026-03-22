@@ -2,6 +2,9 @@ from fastapi import FastAPI
 import joblib
 from app.features import extract_features
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
