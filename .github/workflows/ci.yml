@@ -11,27 +11,24 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # also update this
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.11
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # RUN TRAINING (THIS IS WHAT YOU WERE MISSING)
       - name: Train model
         run: python scripts/train.py
 
-      # BUILD DOCKER
       - name: Build Docker image
         run: docker build -t churn-ml .
 
-      # UPLOAD ARTIFACTS (VERY IMPORTANT)
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: model-artifacts
           path: |
